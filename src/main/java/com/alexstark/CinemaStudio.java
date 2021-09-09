@@ -1,21 +1,34 @@
 package com.alexstark;
 
+import java.util.Scanner;
+
 public class CinemaStudio {
     public static void main(String[] args) {
-        Actor actor1 = new Actor("male", "Max", 31, "Calm", "Comedy");
-        Actor actor2 = new Actor("female", "Kate", 25, "Obstinate", "Melodrama");
-        Director director = new Director("male", "Leonid", 55, "Talented", "Action,Horror");
-        Stuntman stuntman = new Stuntman("male", "Fedor", 29, "Fights", 180, 85);
-        Camera camera = new Camera("medium-size", "", 108);
+        Actor actor1 = new Actor("male", "Макс", 31, "Спокойный", "Комедия", true);
+        Actor actor2 = new Actor("female", "Кейт", 25, "Импульсивная", "Мелодрама", false);
+        Director director = new Director("male", "Григорий", 55, "Неординарный", false);
+        Stuntman stuntman = new Stuntman("male", "Фёдор", 29, "прыжки через огонь", 180, 85);
+        Camera camera = new Camera("Большая", "Стационарная", 108);
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Выберите, будет ли режиссер пьян. Введите 'да' или 'нет':)");
+        String text = scanner.next();
 
-        System.out.println(actor1.name + " - " + actor1.age);
-        System.out.println(actor2.name + " - " + actor2.age);
+        if (text.equals("да")) {
+            director.directFilm(true);
+            camera.doAwaiting();
+            actor1.expressOpinion1();
+            actor2.expressOpinion2();
+            stuntman.waitingTrick();
+            System.out.println("Съёмочная группа: Снимает пьяного режиссера в инстаграм :)");
 
-        actor1.playRole();
-        actor2.playRole();
-
+        } else if (text.equals("нет")) {
+            director.directFilm(false);
+            camera.shootMovie(actor1.isFamous, actor2.isFamous);
+            actor1.playRole();
+            actor2.playRole();
+            stuntman.performTrick();
+            System.out.println("Аплодисменты от съёмочной группы");
+        }
     }
-
-
 }
